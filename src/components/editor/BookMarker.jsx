@@ -39,6 +39,8 @@ function BookMarker({ url, duration, bookmarker }) {
   const [downloadLink, setDownloadLink] = useState("");
   const bookscroll = document.querySelector("#bookmarkScroll");
 
+  const mounted = useRef(false);
+
   // const [outName, setOutName] = useState("");
 
   // const ffmpeg = createFFmpeg({
@@ -274,6 +276,7 @@ function BookMarker({ url, duration, bookmarker }) {
       }
       return marker;
     });
+    mounted.current = false;
     setMarkers(updateMarkers);
     setEditingText("");
     setAddMarker(null);
@@ -419,7 +422,6 @@ function BookMarker({ url, duration, bookmarker }) {
   //     });
   // }
 
-  const mounted = useRef([false]);
   useEffect(() => {
     if (!mounted.current) {
       mounted.current = true;
@@ -434,7 +436,6 @@ function BookMarker({ url, duration, bookmarker }) {
   return (
     <>
       <div className="BookMarkerContainer">
-
         <h2>📁 컷 보관함</h2>
         <h3>드래그로 선택한 구간을 컷으로 저장할 수 있어요 (Ctrl+Shift+S)</h3>
         <div className="hello" id="bookmarkScroll">
